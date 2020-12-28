@@ -28,11 +28,11 @@ n = len(inputArray)
 # for i in range(len(inputArray)):
 #     print(inputArray[i], end=" ")
 
-# Merge Sort
-sas.mergeSort(inputArray, 0, n - 1)
-print('Merge Sort:')
-for i in range(len(inputArray)):
-    print(inputArray[i], end=" ")
+# # Merge Sort
+# sas.mergeSort(inputArray, 0, n - 1)
+# print('Merge Sort:')
+# for i in range(len(inputArray)):
+#     print(inputArray[i], end=" ")
 
 # # Quick Sort
 # sas.quickSort(inputArray, 0, n - 1)
