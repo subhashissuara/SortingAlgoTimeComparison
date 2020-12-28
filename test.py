@@ -26,3 +26,9 @@ inputArray = [5, 4, 3, 2, 1]
 # print('Insertion Sort:')
 # for i in range(len(inputArray)):
 #     print(inputArray[i], end=" ")
+
+# # Merge Sort
+# sas.mergeSort(inputArray, 0, 5)
+# print('Merge Sort:')
+# for i in range(len(inputArray)):
+#     print(inputArray[i], end=" ")
