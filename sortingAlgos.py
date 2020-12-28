@@ -6,7 +6,7 @@
 def bubbleSort(inputArray): 
     size = len(inputArray)
     for i in range(size): 
-        for j in range(0, size - i - 1): 
+        for j in range(size - i - 1): 
             if inputArray[j] > inputArray[j + 1]:
                 temp = inputArray[j]
                 inputArray[j] = inputArray[j + 1]
@@ -22,3 +22,13 @@ def selectionSort(inputArray):
         temp = inputArray[minElemIndex]
         inputArray[minElemIndex] = inputArray[i]
         inputArray[i] = temp
+
+def insertionSort(inputArray):
+    size = len(inputArray)
+    for i in range(1, size):
+        key = inputArray[i]
+        j = i - 1
+        while j >= 0 and inputArray[j] > key:
+            inputArray[j + 1] = inputArray[j]
+            j -= 1
+        inputArray[j + 1] = key

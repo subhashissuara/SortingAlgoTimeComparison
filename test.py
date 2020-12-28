@@ -13,10 +13,16 @@ inputArray = [5, 4, 3, 2, 1]
 # sas.bubbleSort(inputArray)
 # print('Bubble Sort:')
 # for i in range(len(inputArray)):
-#     print(inputArray[i])
+#     print(inputArray[i], end=" ")
 
 # # Selection Sort
 # sas.selectionSort(inputArray)
 # print('Selection Sort:')
 # for i in range(len(inputArray)):
-#     print(inputArray[i])
+#     print(inputArray[i], end=" ")
+
+# # Insertion Sort
+# sas.insertionSort(inputArray)
+# print('Insertion Sort:')
+# for i in range(len(inputArray)):
+#     print(inputArray[i], end=" ")
