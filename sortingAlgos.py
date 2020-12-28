@@ -35,58 +35,80 @@ def insertionSort(inputArray):
             j -= 1
         inputArray[j + 1] = key
 
-# Unable to resolve index out of range error
-# def combine(inputArray, p, q, r):
-#     leftArraySize = q - p + 1
-#     rightArraySize = r - q
-#     leftArray = [None] * (leftArraySize + 1)
-#     rightArray = [None] * (rightArraySize + 1)
-#     for i in range(leftArraySize):
-#         leftArray[i] = inputArray[p + i]
-#     for j in range(rightArraySize):
-#         rightArray[j] = inputArray[q + j + 1]
-#     leftArray[leftArraySize] = math.inf
-#     rightArray[rightArraySize] = math.inf
-#     i = 0
-#     j = 0
-#     for k in range(p, r):
-#         if (leftArray[i] < rightArray[j]):
-#             inputArray[k] = leftArray[i]
-#             i += 1
-#         else:
-#             inputArray[k] = rightArray[j]
-#             j += 1
-#     print(inputArray, leftArray, rightArray)
-
-# def mergeSort(inputArray, p, r):
-#     if (p < r):
-#         q = (p + r) // 2
-#         mergeSort(inputArray, p, q)
-#         mergeSort(inputArray, q + 1, r)
-#         combine(inputArray, p, q, r)
-    
-def mergeSort(inputArray):
-    def combine(inputArray, leftArray, rightArray):
-        sizeInputArray = len(inputArray)
-        leftArray.append(math.inf)
-        rightArray.append(math.inf)
+def mergeSort(inputArray, p, r):
+    def combine(inputArray, p, q, r):
+        leftArraySize = q - p + 1
+        rightArraySize = r - q
+        leftArray = [None] * (leftArraySize + 1)
+        rightArray = [None] * (rightArraySize + 1)
+        for i in range(leftArraySize):
+            leftArray[i] = inputArray[p + i]
+        for j in range(rightArraySize):
+            rightArray[j] = inputArray[q + j + 1]
+        leftArray[leftArraySize] = math.inf
+        rightArray[rightArraySize] = math.inf
         i = 0
         j = 0
-
-        for k in range(sizeInputArray):
-            if leftArray[i] < rightArray[j]:
+        for k in range(p, r + 1):
+            if (leftArray[i] < rightArray[j]):
                 inputArray[k] = leftArray[i]
                 i += 1
             else:
                 inputArray[k] = rightArray[j]
                 j += 1
-            k += 1
+        print(inputArray, leftArray, rightArray, p, r)
+    
+    if (p < r):
+        q = (p + r) // 2
+        mergeSort(inputArray, p, q)
+        mergeSort(inputArray, q + 1, r)
+        combine(inputArray, p, q, r)
 
-    size = len(inputArray)
-    if size > 1:
-        midPoint = size // 2
-        leftArray = inputArray[:midPoint]
-        rightArray = inputArray[midPoint:]
-        mergeSort(leftArray)
-        mergeSort(rightArray)
-        combine(inputArray, leftArray, rightArray)
+# Alternate Method using Slicing
+# def mergeSort(inputArray):
+#     def combine(inputArray, leftArray, rightArray):
+#         sizeInputArray = len(inputArray)
+#         leftArray.append(math.inf)
+#         rightArray.append(math.inf)
+#         i = 0
+#         j = 0
+
+#         for k in range(sizeInputArray):
+#             if leftArray[i] < rightArray[j]:
+#                 inputArray[k] = leftArray[i]
+#                 i += 1
+#             else:
+#                 inputArray[k] = rightArray[j]
+#                 j += 1
+#             k += 1
+
+#     size = len(inputArray)
+#     if size > 1:
+#         midPoint = size // 2
+#         leftArray = inputArray[:midPoint]
+#         rightArray = inputArray[midPoint:]
+#         mergeSort(leftArray)
+#         mergeSort(rightArray)
+#         combine(inputArray, leftArray, rightArray)
+
+def quickSort(inputArray, p, r):
+    def partition(inputArray, p, r):
+        pivotElem = inputArray[r]
+        i = p - 1
+
+        for j in range(p, r):
+            if(inputArray[j] < pivotElem):
+                i += 1
+                temp = inputArray[i]
+                inputArray[i] = inputArray[j]
+                inputArray[j] = temp
+        
+        temp = inputArray[i + 1]
+        inputArray[i + 1] = inputArray[r]
+        inputArray[r] = temp
+        return i + 1
+
+    if(p < r):
+        partitionPoint = partition(inputArray, p, r)
+        quickSort(inputArray, p, partitionPoint - 1)
+        quickSort(inputArray, partitionPoint + 1, r)
