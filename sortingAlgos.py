@@ -56,7 +56,6 @@ def mergeSort(inputArray, p, r):
             else:
                 inputArray[k] = rightArray[j]
                 j += 1
-        print(inputArray, leftArray, rightArray, p, r)
     
     if (p < r):
         q = (p + r) // 2
@@ -64,7 +63,7 @@ def mergeSort(inputArray, p, r):
         mergeSort(inputArray, q + 1, r)
         combine(inputArray, p, q, r)
 
-# Alternate Method using Slicing
+# Alternate Method using slicing
 # def mergeSort(inputArray):
 #     def combine(inputArray, leftArray, rightArray):
 #         sizeInputArray = len(inputArray)
