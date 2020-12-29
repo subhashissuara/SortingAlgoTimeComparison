@@ -1,15 +1,22 @@
 # --------------------------
 #   Author: Subhashis Suara
 #   Student ID: UCSE19012
+#   Program Dependencies:
+#       Python >= 3.6
+#       Numpy (pip install numpy)
+#       Matplotlib(pip install matplotlib)
+#       sortingAlgos.py file
+#       PyLaTeX (pip install PyLaTeX)
 # --------------------------
 
 import time
 import numpy as np
+import matplotlib.pyplot as plt
 import sortingAlgos as sas
 
 # Mention the array sizes
 # Array Sizes: [10, 100, 1000, 5000, 10000, 20000, 50000, 100000, 200000, 500000, 1000000]
-sizes = np.array([10, 100, 1000, 5000, 10000, 20000, 50000, 100000, 200000, 500000, 1000000])
+sizes = np.array([10, 100, 1000, 2000, 3000])
 
 # Mention the number of times you want to run each algorithm
 times = 1
@@ -22,6 +29,11 @@ class AvgTimings:
         self.sizes = sizes
         self.times = times
         self.roundOff = roundOff
+        self.bubbleSortTimings = []
+        self.selectionSortTimings = []
+        self.insertionSortTimings = []
+        self.mergeSortTimings = []
+        self.quickSortTimings = []
 
     def measureAvgTime(self, size):
         self.bubbleSortAvgTime = 0
@@ -88,6 +100,13 @@ class AvgTimings:
         self.insertionSortAvgTime = round((self.insertionSortAvgTime / self.times), self.roundOff)
         self.mergeSortAvgTime = round((self.mergeSortAvgTime / self.times), self.roundOff)
         self.quickSortAvgTime = round((self.quickSortAvgTime / self.times), self.roundOff)
+
+        # Adding to lists for graph plotting
+        self.bubbleSortTimings.append(self.bubbleSortAvgTime)
+        self.selectionSortTimings.append(self.selectionSortAvgTime)
+        self.insertionSortTimings.append(self.insertionSortAvgTime)
+        self.mergeSortTimings.append(self.mergeSortAvgTime)
+        self.quickSortTimings.append(self.quickSortAvgTime)
     
     def printAvgTimes(self, size):
         print('---------------------------------')
@@ -102,11 +121,30 @@ class AvgTimings:
         print(f'Quick Sort: {self.quickSortAvgTime} secs')
         print('---------------------------------\n')
     
+    def generateGraph(self):
+        sizes = list(self.sizes)
+
+        # Graph Plots
+        plt.plot(sizes, self.bubbleSortTimings, label = "Bubble Sort", marker='o')
+        plt.plot(sizes, self.selectionSortTimings, label = "Selection Sort", marker='o')
+        plt.plot(sizes, self.insertionSortTimings, label = "Insertion Sort", marker='o')
+        plt.plot(sizes, self.mergeSortTimings, label = "Merge Sort", marker='o')
+        plt.plot(sizes, self.quickSortTimings, label = "Quick Sort", marker='o')
+
+        # Graph Details
+        plt.xlabel('Array Sizes')
+        plt.ylabel('Time Taken (in seconds)')
+        plt.title('Comparison of Execution Time for Sorting Algorithms')
+        plt.legend()
+        plt.savefig('./Graph Output/graph.png')
+        # plt.show()
+
     def main(self):
         for size in sizes:
             self.measureAvgTime(int(size))
-            self.printAvgTimes(size)
-        
+            # NOTE: Remove below comment to print timings in terminal
+            # self.printAvgTimes(size)
+        self.generateGraph()
         
 
 
