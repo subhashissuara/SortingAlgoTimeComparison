@@ -107,19 +107,26 @@ class AvgTimings:
         self.mergeSortTimings.append(self.mergeSortAvgTime)
         self.quickSortTimings.append(self.quickSortAvgTime)
     
-    def printAvgTimes(self, size):
-        print('---------------------------------')
-        print('Specifications ->')
-        print(f'Array Size: {size}\nTimes Run: {self.times}\nDecimal Round Off: {self.roundOff}')
-        print('---------------------------------')
-        print('Average Timings (in seconds) ->')
-        print(f'Bubble Sort: {self.bubbleSortAvgTime} secs')
-        print(f'Selection Sort: {self.selectionSortAvgTime} secs')
-        print(f'Insertion Sort: {self.insertionSortAvgTime} secs')
-        print(f'Merge Sort: {self.mergeSortAvgTime} secs')
-        print(f'Quick Sort: {self.quickSortAvgTime} secs')
-        print('---------------------------------\n')
-    
+    def AvgTimesText(self, size):
+        printText = f"""
+---------------------------------
+Specifications ->
+Array Size: {size}\nTimes Run: {self.times}\nDecimal Round Off: {self.roundOff}
+---------------------------------
+Average Timings (in seconds) ->
+Bubble Sort: {self.bubbleSortAvgTime} secs
+Selection Sort: {self.selectionSortAvgTime} secs
+Insertion Sort: {self.insertionSortAvgTime} secs
+Merge Sort: {self.mergeSortAvgTime} secs
+Quick Sort: {self.quickSortAvgTime} secs
+---------------------------------
+"""
+        return printText
+
+    def generateTextOutput(self, outputText):
+        with open('./Text Output/timings.txt', 'w') as writeOutput:
+            writeOutput.write(outputText)
+
     def generateGraph(self):
         sizes = list(self.sizes)
 
@@ -139,12 +146,14 @@ class AvgTimings:
         # plt.show()
 
     def main(self):
+        outputText = "AVERAGE TIMINGS OUTPUT\n"
         for size in sizes:
             self.measureAvgTime(int(size))
             # NOTE: Add/Remove below comment to not print/print timings in terminal
-            self.printAvgTimes(size)
+            print(self.AvgTimesText(size))
+            outputText += self.AvgTimesText(size)
         self.generateGraph()
-        
+        self.generateTextOutput(outputText)
 
 
 if __name__ == "__main__":
