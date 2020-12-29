@@ -1,6 +1,12 @@
 # --------------------------
 #   Author: Subhashis Suara
 #   Student ID: UCSE19012
+#   Sorting algorithms:
+#       Bubble Sort
+#       Selection Sort
+#       Insertion Sort
+#       Merge Sort
+#       Quick Sort
 # --------------------------
 
 import math
