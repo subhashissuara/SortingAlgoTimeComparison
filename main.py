@@ -18,7 +18,7 @@ import sortingAlgos as sas
 sizes = np.array([10, 100, 1000, 5000, 10000, 20000, 50000, 100000, 200000, 500000, 1000000])
 
 # Mention the number of times you want to run each algorithm
-times = 20
+times = 10
 
 # Number of places to round off
 roundOff = 4
@@ -55,25 +55,25 @@ class AvgTimings:
             startTime = time.time()
             sas.bubbleSort(bubbleSortInputArray)
             endTime = time.time()
-            self.bubbleSortAvgTime = (endTime - startTime)
+            self.bubbleSortAvgTime += (endTime - startTime)
             
             # Selection Sort
             startTime = time.time()
             sas.selectionSort(selectionSortInputArray)
             endTime = time.time()
-            self.selectionSortAvgTime = (endTime - startTime)
+            self.selectionSortAvgTime += (endTime - startTime)
             
             # Insertion Sort
             startTime = time.time()
             sas.insertionSort(insertionSortInputArray)
             endTime = time.time()
-            self.insertionSortAvgTime = (endTime - startTime)
+            self.insertionSortAvgTime += (endTime - startTime)
             
             # Merge Sort
             startTime = time.time()
             sas.mergeSort(mergeSortInputArray, 0, size - 1)
             endTime = time.time()
-            self.mergeSortAvgTime = (endTime - startTime)
+            self.mergeSortAvgTime += (endTime - startTime)
             
             # Quick Sort
             startTime = time.time()
@@ -89,7 +89,7 @@ class AvgTimings:
             quickSortInputArray = np.array(tempArray)
             # ---------------------------------------------------------------------------------------------------------
             endTime = time.time()
-            self.quickSortAvgTime = (endTime - startTime)
+            self.quickSortAvgTime += (endTime - startTime)
             
             self.timesCounter -= 1
         
