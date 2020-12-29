@@ -4,71 +4,83 @@
 # --------------------------
 
 import time
-import random
 import numpy as np
 import sortingAlgos as sas
 
 # Mention the array sizes
-sizes = [10, 100, 1000, 5000, 10000, 20000, 50000, 100000, 200000, 500000, 1000000]
+# Array Sizes: [10, 100, 1000, 5000, 10000, 20000, 50000, 100000, 200000, 500000, 1000000]
+sizes = np.array([10, 100, 1000, 5000, 10000, 20000, 50000, 100000, 200000, 500000, 1000000])
 
 # Mention the number of times you want to run each algorithm
-times = 5
+times = 1
 
 # Number of places to round off
 roundOff = 4
 
 class AvgTimings:
-    def __init__(self, size, times, roundOff):
-        self.size = size
+    def __init__(self, sizes, times, roundOff):
+        self.sizes = sizes
         self.times = times
         self.roundOff = roundOff
-        self.measureAvgTime()
 
-    def measureAvgTime(self):
+    def measureAvgTime(self, size):
         self.bubbleSortAvgTime = 0
         self.selectionSortAvgTime = 0
         self.insertionSortAvgTime = 0
         self.mergeSortAvgTime = 0
         self.quickSortAvgTime = 0
         # Measures time for each algorithm
-        timesCounter = self.times
-        while timesCounter > 0:
-            # Creates random array of numbers for given size
-            inputArray = []
-            for num in range(self.size):
-                inputArray.append(random.randint(1, self.size))
-            
+        self.timesCounter = self.times
+        while self.timesCounter > 0:
+            # Creates random arrays of numbers for given size
+            inputArray = np.random.randint(1, size, size = size)
+            bubbleSortInputArray = np.array(inputArray)
+            selectionSortInputArray = np.array(inputArray)
+            insertionSortInputArray = np.array(inputArray)
+            mergeSortInputArray = np.array(inputArray)
+            quickSortInputArray = np.array(inputArray)
+
             # Bubble Sort
             startTime = time.time()
-            sas.bubbleSort(inputArray)
+            sas.bubbleSort(bubbleSortInputArray)
             endTime = time.time()
             self.bubbleSortAvgTime = (endTime - startTime)
             
             # Selection Sort
             startTime = time.time()
-            sas.selectionSort(inputArray)
+            sas.selectionSort(selectionSortInputArray)
             endTime = time.time()
             self.selectionSortAvgTime = (endTime - startTime)
-
+            
             # Insertion Sort
             startTime = time.time()
-            sas.insertionSort(inputArray)
+            sas.insertionSort(insertionSortInputArray)
             endTime = time.time()
             self.insertionSortAvgTime = (endTime - startTime)
-
+            
             # Merge Sort
             startTime = time.time()
-            sas.mergeSort(inputArray, 0, self.size - 1)
+            sas.mergeSort(mergeSortInputArray, 0, size - 1)
             endTime = time.time()
             self.mergeSortAvgTime = (endTime - startTime)
-
+            
             # Quick Sort
             startTime = time.time()
-            sas.quickSort(inputArray, 0, self.size - 1)
+            # ---------------------------------------------------------------------------------------------------------
+            # sas.quickSort(quickSortInputArray, 0, size - 1) 
+            # NOTE: sas.quickSort() works fine but it hits the maximum recursion limit after array size 1000.
+            # Hence, for the purpose of measuring timings of large size arrays I am using np.argsort to run quick sort
+            quickSortOutputIndexes = np.argsort(quickSortInputArray, None, 'quicksort', None)
+            quickSortOutputIndexArray = np.array(quickSortOutputIndexes)
+            tempArray = []
+            for index in quickSortOutputIndexArray:
+                tempArray.append(quickSortInputArray[index])
+            quickSortInputArray = np.array(tempArray)
+            # ---------------------------------------------------------------------------------------------------------
             endTime = time.time()
             self.quickSortAvgTime = (endTime - startTime)
-
-            timesCounter -= 1
+            
+            self.timesCounter -= 1
         
         # Calculating Average
         self.bubbleSortAvgTime = round((self.bubbleSortAvgTime / self.times), self.roundOff)
@@ -77,18 +89,27 @@ class AvgTimings:
         self.mergeSortAvgTime = round((self.mergeSortAvgTime / self.times), self.roundOff)
         self.quickSortAvgTime = round((self.quickSortAvgTime / self.times), self.roundOff)
     
-    def printAvgTimes(self):
+    def printAvgTimes(self, size):
         print('---------------------------------')
         print('Specifications ->')
-        print(f'Array Size: {self.size}\nTimes Run: {self.times}\nDecimal Round Off: {self.roundOff}')
+        print(f'Array Size: {size}\nTimes Run: {self.times}\nDecimal Round Off: {self.roundOff}')
         print('---------------------------------')
         print('Average Timings (in seconds) ->')
-        print(f'Bubble Sort: {self.bubbleSortAvgTime}')
-        print(f'Selection Sort: {self.selectionSortAvgTime}')
-        print(f'Insertion Sort: {self.insertionSortAvgTime}')
-        print(f'Merge Sort: {self.mergeSortAvgTime}')
-        print(f'Quick Sort: {self.quickSortAvgTime}')
-        print('---------------------------------')
+        print(f'Bubble Sort: {self.bubbleSortAvgTime} secs')
+        print(f'Selection Sort: {self.selectionSortAvgTime} secs')
+        print(f'Insertion Sort: {self.insertionSortAvgTime} secs')
+        print(f'Merge Sort: {self.mergeSortAvgTime} secs')
+        print(f'Quick Sort: {self.quickSortAvgTime} secs')
+        print('---------------------------------\n')
+    
+    def main(self):
+        for size in sizes:
+            self.measureAvgTime(int(size))
+            self.printAvgTimes(size)
+        
+        
 
-timings = AvgTimings(5000, times, roundOff)
-timings.printAvgTimes()
+
+if __name__ == "__main__":
+    timings = AvgTimings(sizes, times, roundOff)
+    timings.main()
