@@ -1,4 +1,4 @@
-# --------------------------
+# -----------------------------------------
 #   Author: Subhashis Suara
 #   Student ID: UCSE19012
 #   Program Dependencies:
@@ -6,8 +6,7 @@
 #       Numpy (pip install numpy)
 #       Matplotlib(pip install matplotlib)
 #       sortingAlgos.py file
-#       PyLaTeX (pip install PyLaTeX)
-# --------------------------
+# -----------------------------------------
 
 import time
 import numpy as np
@@ -142,8 +141,8 @@ class AvgTimings:
     def main(self):
         for size in sizes:
             self.measureAvgTime(int(size))
-            # NOTE: Remove below comment to print timings in terminal
-            # self.printAvgTimes(size)
+            # NOTE: Add/Remove below comment to not print/print timings in terminal
+            self.printAvgTimes(size)
         self.generateGraph()
         
 
