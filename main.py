@@ -15,10 +15,10 @@ import sortingAlgos as sas
 
 # Mention the array sizes
 # Array Sizes: [10, 100, 1000, 5000, 10000, 20000, 50000, 100000, 200000, 500000, 1000000]
-sizes = np.array([10, 100, 1000, 2000, 3000])
+sizes = np.array([10, 100, 1000, 5000, 10000, 20000, 50000, 100000, 200000, 500000, 1000000])
 
 # Mention the number of times you want to run each algorithm
-times = 1
+times = 20
 
 # Number of places to round off
 roundOff = 4
