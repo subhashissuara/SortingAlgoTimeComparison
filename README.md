@@ -24,3 +24,8 @@ Sorting algorithms included are:
 Numpy (pip install numpy)
 Matplotlib (pip install matplotlib)
 ```
+# How to Run
+Open main.py file and change the values as required. Run using the command:
+```
+python main.py
+```
