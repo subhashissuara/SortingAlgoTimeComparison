@@ -124,7 +124,7 @@ Quick Sort: {self.quickSortAvgTime} secs
         return printText
 
     def generateTextOutput(self, outputText):
-        with open('./Text Output/timings.txt', 'w') as writeOutput:
+        with open('./timings.txt', 'w') as writeOutput:
             writeOutput.write(outputText)
 
     def generateGraph(self):
@@ -142,7 +142,7 @@ Quick Sort: {self.quickSortAvgTime} secs
         plt.ylabel('Time Taken (in seconds)')
         plt.title('Comparison of Execution Time for Sorting Algorithms')
         plt.legend()
-        plt.savefig('./Graph Output/graph.png')
+        plt.savefig('./graph.png')
         # plt.show()
 
     def main(self):
